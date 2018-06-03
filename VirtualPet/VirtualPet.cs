@@ -57,7 +57,7 @@ namespace VirtualPet
             // Default Constructor
         }
 
-        public VirtualPet(int sleep, int hunger, int boredom)
+        public VirtualPet(int sleep, int hunger, int boredom) // constructor to access sleep, hunger, boredom
         {
             this.Sleep = sleep;
             this.Hunger = hunger;
@@ -68,7 +68,7 @@ namespace VirtualPet
 
         public void Tick() // Tick method
         {
-            Sleep--;
+            Sleep --;
             if (Sleep < 1)
             {
                 SleepAlert(true);
@@ -78,17 +78,17 @@ namespace VirtualPet
                 SleepAlert(false);
             }
 
-            Hunger++;
+            Hunger ++;
             if (Hunger > 9)
             {
-                HungerAlert(true);
+                StarvingAlert(true);
             }
             else
             {
-                HungerAlert(false);
+                StarvingAlert(false);
             }
-
-            Boredom++;
+                        
+            Boredom ++;
             if (Boredom > 9)
             {
                 BoredomAlert(true);
@@ -99,13 +99,39 @@ namespace VirtualPet
             }
         }
 
+        public void Nap() // Nap method
+        {
+            Sleep += 4;
+            Hunger++;
+        }
+
+        public void Eat() // Eat method
+        {
+            Hunger -= 4;
+            Sleep--;
+        }
+
+        public void Play() // Play method
+        {
+            Boredom -= 4;
+            Hunger++;
+            Sleep--;
+        }
+
+        public void Vacation() // Vacation method
+        {
+            Boredom += 7;
+            Hunger +=5;
+            Sleep +=5;
+        }
+
         public bool SleepAlert(bool status)
         {
             EnoughSleep = status;
             return EnoughSleep;
         }
 
-        public bool HungerAlert(bool status)
+        public bool StarvingAlert(bool status)
         {
             EnoughFood = status;
             return EnoughFood;
